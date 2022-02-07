@@ -1,0 +1,10 @@
+import axios from "axios";
+
+axios.defaults.baseURL = 'https://api.themoviedb.org/3'
+const key = 'f8fb1aa4ecd91eaa841106c5d2d7056f';
+
+export const getPublications = async () => {
+    const response = await axios.get(`/trending/movie/week?api_key=${key}`);    
+    return response.data.results;
+    
+}
