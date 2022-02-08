@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
+import s from './MovieDetailsPage.module.css'
 import { getPublicationId } from "services/publicationsApi";
+
 
 
 
@@ -22,21 +24,21 @@ export const MovieDetailsPage = () => {
       FetchItem();     
     }, [movieId]);
     
-    
+    const {genres, title, release_date, overview, poster_path, vote_average } = item
     
     return (
-        <div>
-            <div><img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} /></div>
-            <div> 
-                <h1>{movieId}</h1>
-                <h2>{item.title}({item.release_date})</h2>
-             
-                <h3>Overview:</h3>
-                <p>{item.overview}</p>
-                <h3>Genres:</h3>
-             {/* {item.genres.map(genre => (
-                 <li>{genre.name}</li>
-             ))} */}
+        <div className={s.div}>           
+            <div><img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} className={s.filmImg}/></div>
+            <div className={s.filmInfo}> 
+                {/* <h1>{movieId}</h1> */}
+                <h1>{title}({release_date})</h1>
+                <p>User Score: {vote_average}</p>
+                <h2>Overview:</h2>
+                <p>{overview}</p>
+                <h2>Genres:</h2>
+             {genres && genres.map(genre => (
+                 <li key={genre.id}>{genre.name}</li>
+             ))}
              </div>
         </div>
     )
