@@ -8,3 +8,7 @@ export const getPublications = async () => {
     return response.data.results;
     
 }
+export const getPublicationId = async (id) => {
+    const response = await axios.get(`/movie/${id}?api_key=${key}`);
+    return response.data;
+}
