@@ -1,0 +1,8 @@
+.actorsDiv{
+    display: flex;
+    margin: 30px;
+}
+.actorFoto{
+    width: 200px;
+    height: 300px;
+}

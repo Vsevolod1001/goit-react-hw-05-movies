@@ -14,7 +14,7 @@ const Nav = styled.nav`
   display: flex;
   gap: 20px;
 `;
-export const Layout = () => {
+export const Navigator = () => {
     return (
     <Wrapper>
         <Nav>

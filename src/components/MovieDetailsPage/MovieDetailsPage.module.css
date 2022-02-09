@@ -9,3 +9,7 @@
     width: 300xp;
     height: 400px;
 }
+.cardInfo{
+    display: flex;
+    gap: 20px;
+}
