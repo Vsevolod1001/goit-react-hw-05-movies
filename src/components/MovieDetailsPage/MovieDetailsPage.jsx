@@ -1,22 +1,30 @@
-import { useParams, Link, Route, Routes } from "react-router-dom"
+import { useParams, Link, Route, Routes, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react";
 import s from './MovieDetailsPage.module.css'
 import { getPublicationId } from "services/publicationsApi";
-import { Cast } from "components/Cast/Cast";
-import { Reviews } from "components/Reviews/Reviews";
+import { lazy } from "react";
 
 
+
+const Cast = lazy(() => 
+  import('../Cast/Cast').then(module => ({ default: module.Cast}))
+);
+const Reviews = lazy(() => 
+  import('../Reviews/Reviews').then(module => ({ default: module.Reviews}))
+);
 
 export const MovieDetailsPage = () => {
     const {movieId} = useParams();
     const [item, setItem] = useState([]);
+    const location = useLocation();
+    console.log(location)
+    
     
     useEffect(() => {
       async function FetchItem () {
           try {
-              const card = await getPublicationId(movieId); 
-              console.log(card)             
-              setItem(card)
+              const card = await getPublicationId(movieId);                           
+              setItem([card])
           } catch (error) {
              
           }
@@ -24,17 +32,15 @@ export const MovieDetailsPage = () => {
       FetchItem();     
     }, [movieId]);
     
-    const {genres, title, release_date, overview, poster_path, vote_average } = item
-    const pars = parseFloat(release_date)
-      
-    return (
+return (
         <div>
             <hr />
-            <Link to='/home'> к публикациям</Link>
-            <div className={s.div}>                       
+            <Link to={location?.state?.from ?? '/home'}>обратно к списку</Link>
+            {item.map(({genres, title, release_date, overview, poster_path, vote_average, id}) => (
+                <div className={s.div} key={id}>                       
                 <div><img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} className={s.filmImg}/></div>
                 <div className={s.filmInfo}>                 
-                <h1>{title} ({pars})</h1>
+                <h1>{title} ({parseFloat(release_date)})</h1>
                 <p>User Score: {vote_average}</p>
                 <h2>Overview:</h2>
                 <p>{overview}</p>
@@ -43,7 +49,8 @@ export const MovieDetailsPage = () => {
                  <li key={genre.id}>{genre.name}</li>
              ))}
                 </div>
-            </div> 
+            </div>
+            ))} 
             <hr />
             <div className={s.cardInfo}>
                 <Link to={'cast'}>Cast</Link>

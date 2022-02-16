@@ -1,4 +1,4 @@
-
+import { Suspense } from 'react';
 import {NavLink, Outlet} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -21,7 +21,9 @@ export const Navigator = () => {
             <Link to="/home">Home</Link>
             <Link to="/movies">Movies</Link>                        
         </Nav>
-        <Outlet />
+        <Suspense fallback="">
+            <Outlet />
+        </Suspense>        
     </Wrapper>
     )
 }

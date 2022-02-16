@@ -15,10 +15,12 @@ export const getPublicationId = async (id) => {
 export const getPublicationCastId = async (id) => {
     const response = await axios.get(`/movie/${id}/credits?api_key=${key}`);
     return response.data.cast;
-    
 }
 export const getPublicationReviewsId = async (id) => {
     const response = await axios.get(`/movie/${id}/reviews?api_key=${key}`);
     return response.data.results;
-    
+}
+export const getSearchPublication = async (searchMovie) => {
+    const response = await axios.get(`/search/movie?api_key=${key}&query=${searchMovie}`);
+    return response.data.results;
 }
