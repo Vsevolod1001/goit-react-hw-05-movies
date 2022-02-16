@@ -6,7 +6,7 @@ import { TailSpin } from  'react-loader-spinner'
 
 
 export const MoviesPage = () => {  
-    const [searchkinchik, setSearchkinchik] = useState([])
+    const [searhFilm, setSearhFilm] = useState([])
     const [isLoad, setIsLoad] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
@@ -21,7 +21,7 @@ export const MoviesPage = () => {
          try {
              const cardSearch = await getSearchPublication(query)
              
-             setSearchkinchik(cardSearch)
+             setSearhFilm(cardSearch)
          } catch (error) {
              
          } finally {
@@ -63,9 +63,9 @@ export const MoviesPage = () => {
                     </form>
                 </header>
             </div>
-            {searchkinchik.length > 0 && (
+            {searhFilm.length > 0 && (
             <ul>
-                {searchkinchik.map(({id, title}) => (
+                {searhFilm.map(({id, title}) => (
                     <li key={id}>
                         <Link to={`/movies/${id}`} state={{from: location}}>{title}</Link>
                     </li>
