@@ -53,8 +53,8 @@ return (
             ))} 
             <hr />
             <div className={s.cardInfo}>
-                <Link to={'cast'}>Cast</Link>
-                <Link to={'reviews'}>Reviews</Link>
+                <Link to={'cast'} state={{from: location?.state?.from ?? '/'}}>Cast</Link>
+                <Link to={'reviews'} state={{from: location?.state?.from ?? '/'}}>Reviews</Link>
             </div>
             <div>
             <Routes>
