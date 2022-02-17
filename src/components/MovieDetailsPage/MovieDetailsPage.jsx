@@ -17,7 +17,7 @@ export const MovieDetailsPage = () => {
     const {movieId} = useParams();
     const [item, setItem] = useState([]);
     const location = useLocation();
-    console.log(location)
+    
     
     
     useEffect(() => {
