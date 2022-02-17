@@ -6,9 +6,9 @@ import { TailSpin } from  'react-loader-spinner'
 
 
 export const MoviesPage = () => {  
-    const [searhFilm, setSearhFilm] = useState([])
-    const [isLoad, setIsLoad] = useState(false)
+    const [searhFilm, setSearhFilm] = useState([])    
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isLoad, setIsLoad] = useState(false)
     const location = useLocation();
     const query = searchParams.get('query')
 
@@ -20,8 +20,13 @@ export const MoviesPage = () => {
         setIsLoad(true);
          try {
              const cardSearch = await getSearchPublication(query)
+             if (cardSearch.length === 0) {
+                 alert(`по запросу "${query}", фильмов не найдено`)
+                 setSearchParams('');
+             } 
              
              setSearhFilm(cardSearch)
+             
          } catch (error) {
              
          } finally {
@@ -33,12 +38,14 @@ export const MoviesPage = () => {
        
     const hendleSubmit = e => {
         e.preventDefault();
+       
         setSearchParams({ query: e.currentTarget.elements.query.value });
 
         if (e.currentTarget.elements.query.value.trim() === '') {
             alert('введите название фильма')
             return;            
         }
+        e.currentTarget.reset();
     }
    
     return ( 
