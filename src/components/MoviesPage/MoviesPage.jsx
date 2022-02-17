@@ -23,6 +23,7 @@ export const MoviesPage = () => {
              if (cardSearch.length === 0) {
                  alert(`по запросу "${query}", фильмов не найдено`)
                  setSearchParams('');
+                 
              } 
              
              setSearhFilm(cardSearch)
@@ -34,7 +35,7 @@ export const MoviesPage = () => {
           } 
      }
      FetchSearch();
-    }, [query])
+    }, [query, setSearchParams])
        
     const hendleSubmit = e => {
         e.preventDefault();
